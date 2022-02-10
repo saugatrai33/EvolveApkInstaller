@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tite_evolve_dialog">EvolveAppInstaller</string>
+    <string name="msg_apk_install">Please set Google Chrome as a default browser and try again.</string>
+    <string name="label_neutral_btn">OK</string>
+</resources>
