@@ -18,8 +18,9 @@ dependencies {
 ```
 
 ## In your Activity or Fragment
-```
-val url:String = "https://www.google.com/"
-val apkInstaller = EvolveAppInstaller(this)
-apkInstaller.installApk(Uri.parse(url))
+	val intent = Intent(this, EvolveAppInstallActivity::class.java)
+	intent.putExtra("APK_URL", it.downloadLink!!)
+	intent.putExtra("APK_NAME", "RMAP-UPDATE-${System.currentTimeMillis()}-${firebaseResponseModel?.newAppVersion}.apk",)
+	intent.putExtra("APP_ID", BuildConfig.APPLICATION_ID)
+	startActivity(intent)
 ```
