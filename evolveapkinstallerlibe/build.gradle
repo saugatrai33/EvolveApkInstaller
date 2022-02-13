@@ -49,7 +49,7 @@ afterEvaluate {
 
                 groupId = 'com.github.saugatrai33'
                 artifactId = 'evolve-app-installer'
-                version = '0.0.1'
+                version = '0.0.3'
             }
         }
     }
