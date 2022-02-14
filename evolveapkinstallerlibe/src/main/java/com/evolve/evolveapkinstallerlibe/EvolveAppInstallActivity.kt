@@ -1,4 +1,4 @@
-package com.example.evolveapkinstallerlibe
+package com.evolve.evolveapkinstallerlibe
 
 import android.app.DownloadManager
 import android.content.BroadcastReceiver

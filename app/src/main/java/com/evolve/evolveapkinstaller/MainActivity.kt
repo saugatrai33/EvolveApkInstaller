@@ -1,4 +1,4 @@
-package com.example.evolveapkinstaller
+package com.evolve.evolveapkinstaller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

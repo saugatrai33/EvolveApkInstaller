@@ -1,13 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jlleitschuh.gradle.ktlint'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.evolveapkinstaller"
+        applicationId "com.evolve.evolveapkinstaller"
         minSdk 21
         targetSdk 31
         versionCode 1

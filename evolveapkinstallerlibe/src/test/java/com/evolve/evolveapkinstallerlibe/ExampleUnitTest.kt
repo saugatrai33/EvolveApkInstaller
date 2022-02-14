@@ -1,4 +1,4 @@
-package com.example.evolveapkinstaller
+package com.evolve.evolveapkinstallerlibe
 
 import org.junit.Test
 
