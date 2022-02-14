@@ -1,4 +1,4 @@
-package com.example.evolveapkinstallerlibe
+package com.evolve.evolveapkinstallerlibe
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
