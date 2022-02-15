@@ -13,7 +13,7 @@ allprojects {
 
 ```
 dependencies {
-	implementation 'com.github.saugatrai33:EvolveApkInstaller:Tag'
+	implementation 'com.github.saugatrai33:EvolveApkInstaller:1.0.0'
 }
 ```
 
