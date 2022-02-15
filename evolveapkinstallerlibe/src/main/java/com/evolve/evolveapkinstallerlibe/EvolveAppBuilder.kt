@@ -26,7 +26,7 @@ class EvolveAppBuilder(
     private val activity: AppCompatActivity,
     private val url: String,
     private val fileName: String,
-    val appId: String
+    private val appId: String
 ) {
     companion object {
         private const val FILE_BASE_PATH = "file://"
