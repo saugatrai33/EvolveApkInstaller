@@ -1,7 +1,6 @@
 package com.evolve.evolveapkinstallerlibe
 
 import android.Manifest
-import android.util.Patterns
 import android.webkit.URLUtil
 import androidx.appcompat.app.AppCompatActivity
 import com.fondesa.kpermissions.allGranted
@@ -9,7 +8,6 @@ import com.fondesa.kpermissions.anyPermanentlyDenied
 import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
-import java.util.regex.Pattern
 
 class EvolveAppInstaller(
     private val activity: AppCompatActivity,

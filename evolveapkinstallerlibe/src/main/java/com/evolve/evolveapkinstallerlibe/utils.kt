@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.evolve.evolveapkinstallerlibe.Constants.APP_INSTALL_PATH
@@ -16,24 +17,28 @@ import com.evolve.evolveapkinstallerlibe.Constants.MIME_TYPE
 import com.evolve.evolveapkinstallerlibe.Constants.PROVIDER_PATH
 import java.io.File
 
+private const val TAG = "utils"
+
 internal fun downloadAndInstallApk(
     context: Context,
     fileName: String,
     url: String,
     appId: String
 ) {
+    println("${TAG}: downloadAndInstallApk: apkDownloadUrl -> $url")
     var destination =
         context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + "/"
     destination += fileName
     val uri = Uri.parse("${FILE_BASE_PATH}$destination")
+    println("${TAG}: downloadAndInstallApk: uri -> $uri")
     val file = File(destination)
     if (file.exists()) file.delete()
     val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     val downloadUri = Uri.parse(url)
     val request = DownloadManager.Request(downloadUri)
     request.setMimeType(MIME_TYPE)
-    request.setTitle("APK Download")
-    request.setDescription("DOWNLOADING $fileName")
+    request.setTitle("DOWNLOAD APK")
+    request.setDescription("Downloading $fileName")
     request.setDestinationUri(uri)
     showInstallOption(context, destination, uri, appId = appId)
     downloadManager.enqueue(request)
@@ -62,6 +67,7 @@ internal fun showInstallOption(
                     appId + PROVIDER_PATH,
                     File(destination)
                 )
+                println("${TAG}: onReceive: contentUri -> $contentUri")
                 val install = Intent(Intent.ACTION_VIEW)
                 install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
