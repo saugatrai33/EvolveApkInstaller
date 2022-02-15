@@ -3,4 +3,6 @@
     <string name="tite_evolve_dialog">EvolveAppInstaller</string>
     <string name="msg_apk_install">Please set Google Chrome as a default browser and try again.</string>
     <string name="label_neutral_btn">OK</string>
+    <string name="title_storage_permission">Storage Permission</string>
+    <string name="desc_storage_permission">Enable storage permission from settings.</string>
 </resources>
