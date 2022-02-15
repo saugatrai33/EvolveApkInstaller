@@ -6,11 +6,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.anyPermanentlyDenied
@@ -36,31 +38,39 @@ class EvolveAppBuilder(
     private val request by lazy {
         activity.permissionsBuilder(
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         ).build()
     }
 
     init {
-        request.send { result ->
-            when {
-                result.anyPermanentlyDenied() -> {
-                    MaterialAlertDialogBuilder(activity)
-                        .setTitle(activity.getString(R.string.title_storage_permission))
-                        .setMessage(activity.getString(R.string.desc_storage_permission))
-                        .setNeutralButton("Ok") { dialog, _ ->
-                            dialog.dismiss()
-                        }
-                        .show()
-                }
-                result.anyShouldShowRationale() -> {
-
-                }
-                result.allGranted() -> {
-                    downloadAndInstallApk()
+        if (checkStoragePermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            && checkStoragePermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        )
+            request.send { result ->
+                when {
+                    result.anyPermanentlyDenied() -> showStorageEnableDialog()
+                    result.anyShouldShowRationale() -> showStorageEnableDialog()
+                    result.allGranted() -> downloadAndInstallApk()
                 }
             }
-        }
+        else downloadAndInstallApk()
     }
+
+    private fun showStorageEnableDialog() {
+        MaterialAlertDialogBuilder(activity)
+            .setTitle(activity.getString(R.string.title_storage_permission))
+            .setMessage(activity.getString(R.string.desc_storage_permission))
+            .setNeutralButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+                activity.finish()
+            }
+            .show()
+    }
+
+    private fun checkStoragePermission(permission: String) = ContextCompat.checkSelfPermission(
+        activity,
+        permission
+    ) != PackageManager.PERMISSION_GRANTED
 
     class Builder {
         lateinit var activity: AppCompatActivity
@@ -79,7 +89,7 @@ class EvolveAppBuilder(
         fun build() = EvolveAppBuilder(activity, url, fileName, appId)
     }
 
-    fun downloadAndInstallApk() {
+    private fun downloadAndInstallApk() {
         var destination =
             activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + "/"
         destination += fileName
