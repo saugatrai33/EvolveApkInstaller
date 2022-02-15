@@ -42,7 +42,7 @@ class EvolveAppBuilder(
         ).build()
     }
 
-    init {
+    fun install() {
         if (checkStoragePermission(Manifest.permission.READ_EXTERNAL_STORAGE)
             && checkStoragePermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         )
@@ -60,7 +60,7 @@ class EvolveAppBuilder(
         MaterialAlertDialogBuilder(activity)
             .setTitle(activity.getString(R.string.title_storage_permission))
             .setMessage(activity.getString(R.string.desc_storage_permission))
-            .setNeutralButton("Ok") { dialog, _ ->
+            .setNeutralButton(activity.getString(R.string.btn_label_ok)) { dialog, _ ->
                 dialog.dismiss()
                 activity.finish()
             }
@@ -72,13 +72,10 @@ class EvolveAppBuilder(
         permission
     ) != PackageManager.PERMISSION_GRANTED
 
-    class Builder {
-        lateinit var activity: AppCompatActivity
-        lateinit var url: String
-        lateinit var fileName: String
-        lateinit var appId: String
-
-        fun context(a: AppCompatActivity) = apply { activity = a }
+    class Builder(private val context: AppCompatActivity) {
+        private lateinit var url: String
+        private lateinit var fileName: String
+        private lateinit var appId: String
 
         fun url(u: String) = apply { url = u }
 
@@ -86,7 +83,7 @@ class EvolveAppBuilder(
 
         fun appId(id: String) = apply { appId = id }
 
-        fun build() = EvolveAppBuilder(activity, url, fileName, appId)
+        fun build() = EvolveAppBuilder(context, url, fileName, appId)
     }
 
     private fun downloadAndInstallApk() {

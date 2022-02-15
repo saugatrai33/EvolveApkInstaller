@@ -5,4 +5,5 @@
     <string name="label_neutral_btn">OK</string>
     <string name="title_storage_permission">Storage Permission</string>
     <string name="desc_storage_permission">Enable storage permission from settings.</string>
+    <string name="btn_label_ok">Ok</string>
 </resources>
