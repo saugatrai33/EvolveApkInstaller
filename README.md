@@ -26,5 +26,5 @@ val evolveAppBuilder = EvolveAppInstaller.Builder(this)
                         .fileName((fileName))
                         .appId(BuildConfig.APPLICATION_ID)
                         .build()
-                    evolveAppBuilder.install()
+evolveAppBuilder.install()
 ```
